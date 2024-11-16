@@ -2,9 +2,12 @@
 # -*- coding:utf-8 -*-
 import sys
 import os
-picdir = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), 'pic/2in13')
-fontdir = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), 'pic')
-libdir = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), 'lib')
+
+from util import get_lib_dir, get_pic_dir, get_font_dir
+
+picdir = get_pic_dir()
+fontdir = get_font_dir()
+libdir = get_lib_dir()
 if os.path.exists(libdir):
     sys.path.append(libdir)
 
@@ -15,6 +18,8 @@ import logging
 from PIL import Image,ImageDraw,ImageFont
 import traceback
 import threading
+
+from screen import MenuScreen, TextScreen
 
 logging.basicConfig(level=logging.DEBUG)
 flag_t = 1
@@ -71,7 +76,9 @@ try:
     font15 = ImageFont.truetype(os.path.join(fontdir, 'bitcoin-webfont.ttf'), 15)
     font24 = ImageFont.truetype(os.path.join(fontdir, 'bitcoin-webfont.ttf'), 24)
 
-    image = Image.open(os.path.join(picdir, 'Menu.bmp'))
+    screen = TextScreen('bitcoin-webfont.ttf', 24)
+
+    image = screen.render()
     epd.displayPartBaseImage(epd.getbuffer(image))
     DrawImage = ImageDraw.Draw(image)
     epd.init(epd.PART_UPDATE)
