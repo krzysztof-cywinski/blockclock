@@ -1,12 +1,13 @@
 from PIL import Image, ImageDraw, ImageFont
-from TP_lib import EPD_WIDTH, EPD_HEIGHT
+from TP_lib import EPD
 
 from util import get_pic_dir, get_font_dir
 
 class Screen():
-  def __init__(self, name: str):
+  def __init__(self, name: str, epd: EPD):
     self.name = name
-    self.image = Image.new('1', (EPD_WIDTH, EPD_HEIGHT), 255)
+    self.epd = epd
+    self.image = Image.new('1', (epd.width, epd.height), 255)
     self.draw = DrawImage = ImageDraw.Draw(self.image)
 
   def handle_touch_input(self, x: int, y: int):
@@ -16,15 +17,15 @@ class Screen():
     pass
 
 class MenuScreen(Screen):
-  def __init__(self):
-    super.__init__("Menu")
+  def __init__(self, epd: EPD):
+    super.__init__("Menu", epd)
 
   def render(self) -> Image:
     return Image.open(os.path.join(picdir, 'Menu.bmp'))
 
 class TextScreen(Screen):
-  def __init__(self, font: str, font_size: int, initial_text: str = ''):
-    super.__init__("Text")
+  def __init__(self, epd: EPD, font: str, font_size: int, initial_text: str = ''):
+    super.__init__("Text", epd)
     self.text = initial_text
     self.font = ImageFont.truetype(os.path.join(get_font_dir(), font), font_size)
     self.font_size = font_size
