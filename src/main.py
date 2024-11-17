@@ -23,7 +23,7 @@ import threading
 
 from screen import TextScreen
 
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.WARN)
 flag_t = 1
 
 def get_btc_price() -> int:
