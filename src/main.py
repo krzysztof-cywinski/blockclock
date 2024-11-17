@@ -80,7 +80,7 @@ try:
         resp = requests.get(url='https://api.coindesk.com/v1/bpi/currentprice.json')
         data = resp.json()
         price = data['bpi']['USD']['rate'].replace(',', '')
-        price = inf(float(price))
+        price = int(float(price))
         logging.info(price)
 
         screen.set_text(u'₿/$ '+str(price))

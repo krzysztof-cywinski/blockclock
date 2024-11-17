@@ -37,6 +37,6 @@ class TextScreen(Screen):
 
   def child_render(self) -> Image:
     image = Image.new('1', (self.width, self.height), 255)
-    draw = ImageDraw.Draw(self.image)
+    draw = ImageDraw.Draw(image)
     draw.text((self.width/2, self.height/2), self.text, font=self.font, fill=0, anchor='mm')
-    return imageself.image
+    return image
