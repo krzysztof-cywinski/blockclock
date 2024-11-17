@@ -11,7 +11,6 @@ class Screen():
     self.name = name
     self.width = epd.height # this is transposed later
     self.height = epd.width # this is transposed later
-    self.image = Image.new('1', (epd.height, epd.width), 255)
     self.draw = DrawImage = ImageDraw.Draw(self.image)
     self.isDirty = True
 
@@ -19,9 +18,8 @@ class Screen():
     pass
 
   def render(self) -> Image:
-    self.child_render()
-    self.isDirty = False
-    return self.image.transpose(Image.ROTATE_90)
+    image = self.child_render()
+    return image.transpose(Image.ROTATE_90)
 
   def child_render(self):
     # change the internal image
@@ -49,6 +47,7 @@ class TextScreen(Screen):
     self.isDirty = True;
 
   def child_render(self) -> Image:
+    image = Image.new('1', (self.width, self.height), 255)
     self.draw.text((self.width/2, self.height/2), self.text, font=self.font, fill=0, anchor='mm')
     self.isDirty = False
     return self.image
