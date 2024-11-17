@@ -83,7 +83,7 @@ try:
         price = inf(float(price))
         logging.info(price)
 
-        screen.set_text(u'₿/$ '+price)
+        screen.set_text(u'₿/$ '+str(price))
         image = screen.render()
         epd.displayPartBaseImage(epd.getbuffer(image))
         DrawImage = ImageDraw.Draw(image)
