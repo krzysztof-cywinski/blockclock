@@ -10,9 +10,7 @@ class Screen():
   def __init__(self, name: str, epd: epd2in13_V4.EPD):
     self.name = name
     self.width = epd.height # this is transposed later
-    self.height = epd.width # this is transposed later
-    self.draw = DrawImage = ImageDraw.Draw(self.image)
-    self.isDirty = True
+    self.height = epd.width
 
   def handle_touch_input(self, x: int, y: int):
     pass
@@ -26,14 +24,6 @@ class Screen():
     pass
 
 
-class MenuScreen(Screen):
-  def __init__(self, epd: epd2in13_V4.EPD):
-    super(MenuScreen, self).__init__("Menu", epd)
-
-  def render(self) -> Image:
-    return Image.open(os.path.join(picdir, 'Menu.bmp'))
-
-
 class TextScreen(Screen):
   def __init__(self, epd: epd2in13_V4.EPD, font: str, font_size: int, initial_text: str = ''):
     super(TextScreen, self).__init__("Text", epd)
@@ -44,10 +34,9 @@ class TextScreen(Screen):
 
   def set_text(self, text:str):
     self.text = text
-    self.isDirty = True;
 
   def child_render(self) -> Image:
     image = Image.new('1', (self.width, self.height), 255)
-    self.draw.text((self.width/2, self.height/2), self.text, font=self.font, fill=0, anchor='mm')
-    self.isDirty = False
-    return self.image
+    draw = ImageDraw.Draw(self.image)
+    draw.text((self.width/2, self.height/2), self.text, font=self.font, fill=0, anchor='mm')
+    return imageself.image
