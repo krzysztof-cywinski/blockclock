@@ -21,7 +21,7 @@ class Screen():
   def render(self) -> Image:
     self.child_render()
     self.isDirty = False
-    return self.image.transpose(Image.ROTATE_270)
+    return self.image.transpose(Image.ROTATE_90)
 
   def child_render(self):
     # change the internal image
