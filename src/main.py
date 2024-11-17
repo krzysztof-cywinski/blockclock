@@ -28,9 +28,9 @@ flag_t = 1
 
 def get_btc_price() -> int:
     resp = requests.get(
-        url='https://api.coindesk.com/v1/bpi/currentprice.json')
+        url='https://www.binance.com/api/v3/ticker/price?symbol=BTCUSDT')
     data = resp.json()
-    price = data['bpi']['USD']['rate'].replace(',', '')
+    price = data['price']
     return int(float(price))
 
 btc_price = get_btc_price()
@@ -50,7 +50,7 @@ def pthread_btc_price():
         global btc_price
         btc_price = get_btc_price()
         logging.info(btc_price)
-        time.sleep(5)
+        time.sleep(2)
     print("price thread:exit")
 
 try:
@@ -93,7 +93,7 @@ try:
             GT_Dev.TouchpointFlag = 0
             logging.debug('Touched X={} Y={}'.format(GT_Dev.X[0], GT_Dev.Y[0]))
 
-        time.sleep(5)
+        time.sleep(2)
 
 except IOError as e:
     logging.info(e)
