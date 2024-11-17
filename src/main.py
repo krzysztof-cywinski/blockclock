@@ -27,8 +27,8 @@ logging.basicConfig(level=logging.DEBUG)
 flag_t = 1
 
 def get_btc_price() -> int:
-    resp = requests.get(
-        url='https://www.binance.com/api/v3/ticker/price', params={'symbol': 'BTCUSDT'})
+    headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36'}
+    resp = requests.get(url='https://www.binance.com/api/v3/ticker/price', params={'symbol': 'BTCUSDT'}, headers=headers)
     data = resp.json()
     price = data['price']
     return int(float(price))
