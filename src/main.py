@@ -21,7 +21,7 @@ from PIL import Image,ImageDraw,ImageFont
 import traceback
 import threading
 
-from screen import MenuScreen, TextScreen
+from screen import TextScreen
 
 logging.basicConfig(level=logging.DEBUG)
 flag_t = 1
