@@ -90,6 +90,7 @@ try:
             epd.displayPartial_Wait(epd.getbuffer(image))
         else:
             epd.displayPartBaseImage(epd.getbuffer(image))
+            initialized = True
         # DrawImage = ImageDraw.Draw(image)
         # epd.init(epd.PART_UPDATE)
         time.sleep(5)
