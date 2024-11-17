@@ -27,10 +27,11 @@ logging.basicConfig(level=logging.DEBUG)
 flag_t = 1
 
 def get_btc_price() -> int:
-    resp = requests.get(url='https://cex.io/api/ticker/BTC/USDT')
+    resp = requests.get(
+        url='https://api.coinbase.com/v2/exchange-rates', params={'currency': 'BTC'})
     data = resp.json()
-    price = (float(data['bid']) + float(data['ask'])) / 2
-    return int(price)
+    price = data['data']['rates']['USD']
+    return int(float(price))
 
 btc_price = get_btc_price()
 
