@@ -10,7 +10,7 @@ class Screen():
   def __init__(self, name: str, epd: epd2in13_V4.EPD):
     self.name = name
     self.epd = epd
-    self.image = Image.new('1', (epd.width, epd.height), 255)
+    self.image = Image.new('1', (epd.height, epd.width), 255)
     self.draw = DrawImage = ImageDraw.Draw(self.image)
 
   def handle_touch_input(self, x: int, y: int):
@@ -18,6 +18,9 @@ class Screen():
 
   def render(self) -> Image:
     pass
+
+  def _transpose_for_render(self) -> Image:
+    return self.image.transpose(Image.ROTATE_270)
 
 
 class MenuScreen(Screen):
@@ -35,7 +38,13 @@ class TextScreen(Screen):
     self.font = ImageFont.truetype(
         os.path.join(get_font_dir(), font), font_size)
     self.font_size = font_size
+    self.isDirty = True
+
+  def set_text(self, text:str):
+    self.text = text
+    self.isDirty = True;
 
   def render(self) -> Image:
-    self.draw.text((2, 2), 'test', font=self.font, fill=0)
+    self.draw.text((epd.height/2, epd.width/2), self.text, font=self.font, fill=0, anchor='mm')
+    self.isDirty = False
     return self.image

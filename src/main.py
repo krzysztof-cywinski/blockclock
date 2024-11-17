@@ -76,7 +76,8 @@ try:
     font15 = ImageFont.truetype(os.path.join(fontdir, 'bitcoin-webfont.ttf'), 15)
     font24 = ImageFont.truetype(os.path.join(fontdir, 'bitcoin-webfont.ttf'), 24)
 
-    screen = TextScreen(epd, 'Roboto-Black.ttf', 24)
+    screen = TextScreen(epd, 'paplane-regular.ttf', 48)
+    screen.set_text(u'₿/$ 98765')
 
     image = screen.render()
     epd.displayPartBaseImage(epd.getbuffer(image))
