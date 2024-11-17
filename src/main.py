@@ -77,7 +77,7 @@ try:
     screen = TextScreen(epd, 'paplane-regular.ttf', 42)
 
     while(1):
-        resp = requests.get(url=url, params=params)
+        resp = requests.get(url='https://api.coindesk.com/v1/bpi/currentprice.json')
         data = resp.json()
         price = data['bpi']['USD']['rate']
         logging.info(price)
