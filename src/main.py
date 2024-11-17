@@ -47,8 +47,10 @@ def pthread_irq():
 def pthread_btc_price():
     print("price pthread running")
     while flag_t == 1:
+        global btc_price
         btc_price = get_btc_price()
-        sleep(5)
+        logging.info(btc_price)
+        time.sleep(5)
     print("price thread:exit")
 
 try:
@@ -87,10 +89,7 @@ try:
 
         # Read the touch input
         gt.GT_Scan(GT_Dev, GT_Old)
-        if(GT_Old.X[0] == GT_Dev.X[0] and GT_Old.Y[0] == GT_Dev.Y[0] and GT_Old.S[0] == GT_Dev.S[0]):
-            continue
-
-        if(GT_Dev.TouchpointFlag):
+        if((GT_Old.X[0] != GT_Dev.X[0] or GT_Old.Y[0] != GT_Dev.Y[0] or GT_Old.S[0] != GT_Dev.S[0]) and GT_Dev.TouchpointFlag):
             GT_Dev.TouchpointFlag = 0
             logging.debug('Touched X={} Y={}'.format(GT_Dev.X[0], GT_Dev.Y[0]))
 
