@@ -76,7 +76,7 @@ try:
 
     screen = TextScreen(epd, 'paplane-regular.ttf', 42)
 
-    counter = 0
+    initialized = False
     while(1):
         resp = requests.get(url='https://api.coindesk.com/v1/bpi/currentprice.json')
         data = resp.json()
@@ -86,8 +86,10 @@ try:
 
         screen.set_text(u'₿/$ '+str(price))
         image = screen.render()
-        epd.displayPartial_Wait(epd.getbuffer(image))
-        # epd.displayPartBaseImage(epd.getbuffer(image))
+        if initialized:
+            epd.displayPartial_Wait(epd.getbuffer(image))
+        else:
+            epd.displayPartBaseImage(epd.getbuffer(image))
         # DrawImage = ImageDraw.Draw(image)
         # epd.init(epd.PART_UPDATE)
         time.sleep(5)
