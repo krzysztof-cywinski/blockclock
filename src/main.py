@@ -47,9 +47,13 @@ def pthread_irq():
 def pthread_btc_price():
     print("price pthread running")
     while flag_t == 1:
-        global btc_price
-        btc_price = get_btc_price()
-        logging.info(btc_price)
+        try:
+            global btc_price
+            btc_price = get_btc_price()
+            logging.info(btc_price)
+        except Exception as e:
+            logging.error(e)
+
         time.sleep(2)
     print("price thread:exit")
 
