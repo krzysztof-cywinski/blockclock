@@ -51,7 +51,7 @@ class BitcoinPriceScreen(Screen):
     self.price = 0
 
   def set_price(self, price: int):
-    self.text = text
+    self.price = price
 
   def child_render(self) -> Image:
     image = Image.new('1', (self.width, self.height), 255)
