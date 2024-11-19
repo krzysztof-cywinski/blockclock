@@ -44,7 +44,7 @@ class TextScreen(Screen):
 class BitcoinPriceScreen(Screen):
   def __init__(self, epd: epd2in13_V4.EPD):
     super(BitcoinPriceScreen, self).__init__("BitcoinPrice", epd)
-    self.bitcoin_logo = Image.open(os.path.join(get_pic_dir(), 'btc-logo.png'))
+    self.bitcoin_logo = Image.open(os.path.join(get_pic_dir(), 'btc-logo.bmp'))
     self.price_font = ImageFont.truetype(
         os.path.join(get_font_dir(), 'carre-regular.ttf'), 48)
     self.price = 0
