@@ -5,9 +5,9 @@ import os
 import requests
 import time
 
-from util import get_lib_dir, get_pic_dir, get_font_dir
+from util import get_lib_dir, get_img_dir, get_font_dir
 
-picdir = get_pic_dir()
+picdir = get_img_dir()
 fontdir = get_font_dir()
 libdir = get_lib_dir()
 if os.path.exists(libdir):
