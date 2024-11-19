@@ -21,7 +21,7 @@ from PIL import Image,ImageDraw,ImageFont
 import traceback
 import threading
 
-from screen import TextScreen
+from screen import BitcoinPriceScreen
 
 logging.basicConfig(level=logging.WARN)
 flag_t = 1
@@ -79,11 +79,11 @@ try:
     btc_price_t.daemon = True
     btc_price_t.start()
 
-    screen = TextScreen(epd, 'paplane-regular.ttf', 42)
+    screen = BitcoinPriceScreen(epd)
 
     initialized = False
     while(1):
-        screen.set_text(u'₿/$ '+str(btc_price))
+        screen.set_price(btc_price)
         image = screen.render()
         if initialized:
             epd.displayPartial_Wait(epd.getbuffer(image))
