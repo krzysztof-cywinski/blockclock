@@ -54,7 +54,7 @@ class BitcoinPriceScreen(Screen):
 
   def child_render(self) -> Image:
     image = Image.new('1', (self.width, self.height), 255)
-    image.paste(self.bitcoin_logo, (5, 40))
+    image.paste(self.bitcoin_logo, (5, 30))
     draw = ImageDraw.Draw(image)
     draw.text((self.width - 5, self.height/2), str(self.price),
               font=self.price_font, fill=0, anchor='rm')
